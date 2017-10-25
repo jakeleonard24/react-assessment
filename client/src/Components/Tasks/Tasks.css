@@ -1,0 +1,39 @@
+.taskBox{
+    width: 500px;
+    height: 100px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+.taskBoxComplete {
+    margin: 2px;
+    text-decoration: line-through
+}
+
+.notComplete{
+    margin: 2px;
+}
+
+.taskTitleAndDesc{
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+.taskDeleteandComplete{
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
