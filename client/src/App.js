@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Tasks from './Components/Tasks/Tasks'
 import {connect} from 'react-redux';
-import {updateTasks} from './ducks/reducer'
+import {addTask} from './ducks/reducer'
 
 
 class App extends Component {
@@ -11,30 +11,30 @@ class App extends Component {
     super()
 
     this.state = {
-      id: 2,
+      
       title:'',
-      description:'',
+     
       
     }
-    this.addToDo = this.addToDo.bind(this)
+    this.addTask = this.addTask.bind(this)
     
   }
 
-  addToDo(){
+  addTask(){
     if(this.state.title) {
       let task = {
-        id: this.state.id,
+        
         title: this.state.title,
-        description: this.state.description,
-        completed: false
+        
       }
+      console.log(task)
 
-      this.props.updateTasks(task)
+      this.props.addTask(task)
       
       this.setState({
         title:'',
-        description:'',
-        id: this.state.id + 1
+        
+        
       })
     }
   }
@@ -43,7 +43,7 @@ class App extends Component {
   render() 
   
   {
-    console.log(this.state, 'app state')
+    // console.log(this.state, 'app state')
     console.log('app props', this.props.tasks)
     return (
       <div className='appBody'>
@@ -51,11 +51,9 @@ class App extends Component {
           <div className='addTaskBoxDiv'>
             <input placeholder='Title' className='taskTitleInput' value={this.state.title} onChange={(e) => {this.setState({title: e.target.value})}}/>
           </div>
-          <div className='addTaskBoxDiv'>
-            <textarea placeholder='Description' className='taskTextArea' value={this.state.description} onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
-          </div>
+          
           <div>
-            <button onClick={this.addToDo} className='addToDoButton'>Add To Do</button>
+            <button onClick={this.addTask} className='addToDoButton'>Add To Do</button>
           </div>
         
         </div>
@@ -75,4 +73,4 @@ function mapStateToProps( state ) {
   };
 }
 
-export default connect( mapStateToProps, { updateTasks } )( App ); 
+export default connect( mapStateToProps, { addTask } )( App ); 
