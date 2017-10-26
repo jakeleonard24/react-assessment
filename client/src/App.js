@@ -2,47 +2,49 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Tasks from './Components/Tasks/Tasks'
+import {connect} from 'react-redux';
+import {updateTasks} from './ducks/reducer'
+
 
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      tasks: [],
+      id: 2,
       title:'',
       description:'',
       
     }
     this.addToDo = this.addToDo.bind(this)
-    this.deleteTask = this.deleteTask.bind(this)
+    
   }
 
   addToDo(){
     if(this.state.title) {
       let task = {
+        id: this.state.id,
         title: this.state.title,
         description: this.state.description,
         completed: false
       }
-      this.setState({
-        tasks: [...this.state.tasks, task]
-      })
+
+      this.props.updateTasks(task)
+      
       this.setState({
         title:'',
         description:'',
+        id: this.state.id + 1
       })
     }
   }
 
-  deleteTask(i){
-    let deleteArray = this.state.tasks
-    deleteArray.splice(i, 1)
-    this.setState({
-      tasks: deleteArray
-    })
-  }
-  render()  {
+
+  render() 
+  
+  {
     console.log(this.state, 'app state')
+    console.log('app props', this.props.tasks)
     return (
       <div className='appBody'>
         <div className='addTaskBox'>
@@ -59,11 +61,18 @@ class App extends Component {
         </div>
 
       <Tasks 
-      deleteTask={this.deleteTask}
-      tasks={this.state.tasks}></Tasks>
+      ></Tasks>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps( state ) {
+  const { tasks} = state;
+
+  return {
+    tasks
+  };
+}
+
+export default connect( mapStateToProps, { updateTasks } )( App ); 
